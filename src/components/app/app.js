@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 
 import AppHeader from "../app-header";
 import SearchPanel from "../search-panel";
@@ -8,25 +8,45 @@ import PostAddForm from "../post-add-form";
 
 import './app.css';
 
-const App = () => {
+export default class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [
+                {label: 'Going to learn React!', important: true, id: 'Qwe'},
+                {label: 'Thats cool!', important: false, id: 'Rty'},
+                {label: 'fuck them all...', important: false, id: 'Uio'},
+            ]
+        };
+        this.deleteItem = this.deleteItem.bind(this);
+    }
 
-    const data = [
-        {label: 'Going to learn React!', important: true, id: 'Qwe'},
-        {label: 'Thats cool!', important: false, id: 'Rty'},
-        {label: 'fuck them all...', important: false, id: 'Uio'},
-    ];
+    deleteItem(id) {
+        this.setState(({data}) => {
+            const index = data.findIndex(el => el.id === id);
+            const before = data.slice(0, index);
+            const after = data.slice(index + 1);
+            return {
+                data: [...before, ...after]
+            }
+        });
+    }
 
-    return (
-        <div className="app">
-            <AppHeader />
-            <div className="search-panel d-flex">
-                <SearchPanel />
-                <PostStatusFilter/>
+
+    render() {
+        return (
+            <div className="app">
+                <AppHeader/>
+                <div className="search-panel d-flex">
+                    <SearchPanel/>
+                    <PostStatusFilter/>
+                </div>
+                <PostList
+                    posts={this.state.data}
+                    onDeleteHandler={this.deleteItem}
+                />
+                <PostAddForm/>
             </div>
-            <PostList posts={data} />
-            <PostAddForm/>
-        </div>
-    )
+        )
+    }
 };
-
-export default App;
