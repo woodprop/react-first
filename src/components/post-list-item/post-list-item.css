@@ -1,0 +1,54 @@
+.post-list-item {
+  font-size: 1.25rem;
+}
+
+.post-list-item button {
+  width: 35px;
+  height: 35px;
+  margin: 3px;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+.post-list-item button:focus {
+    box-shadow: none;
+    outline: none;
+}
+.post-list-item .btn-star {
+    color: #aeaeae;
+}
+.post-list-item .btn-trash {
+    color: red;
+}
+.post-list-item .fa-heart {
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    font-size: 16px;
+    color: red;
+    transition: 0.3s all;
+    transform: translateX(30px);
+    opacity: 0;
+}
+
+.post-list-item-label {
+  display: block;
+  line-height: 35px;
+  cursor: pointer;
+  user-select: none;
+  transition: 0.5s all;
+}
+
+.post-list-item.like .fa-heart {
+    opacity: 1;
+    transform: translateX(0px);
+}
+
+.post-list-item.important .post-list-item-label {
+    color: #FFD700;
+}
+
+.post-list-item.important .btn-star {
+    color: #FFD700;
+}
