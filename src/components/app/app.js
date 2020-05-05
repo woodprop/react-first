@@ -13,12 +13,14 @@ export default class App extends Component {
         super(props);
         this.state = {
             data: [
-                {label: 'Going to learn React!', important: true, id: 'Qwe'},
-                {label: 'Thats cool!', important: false, id: 'Rty'},
-                {label: 'fuck them all...', important: false, id: 'Uio'},
+                {label: 'Going to learn React!', important: true, id: 1},
+                {label: 'Thats cool!', important: false, id: 2},
+                {label: 'fuck them all...', important: false, id: 3},
             ]
         };
+        this.nextId = 4;
         this.deleteItem = this.deleteItem.bind(this);
+        this.addItem = this.addItem.bind(this);
     }
 
     deleteItem(id) {
@@ -28,6 +30,19 @@ export default class App extends Component {
             const after = data.slice(index + 1);
             return {
                 data: [...before, ...after]
+            }
+        });
+    }
+
+    addItem(text) {
+        const newItem = {
+            label: text,
+            important: false,
+            id: this.nextId++,
+        };
+        this.setState(({data}) => {
+            return {
+                data: [newItem, ...data]
             }
         });
     }
@@ -45,7 +60,9 @@ export default class App extends Component {
                     posts={this.state.data}
                     onDeleteHandler={this.deleteItem}
                 />
-                <PostAddForm/>
+                <PostAddForm
+                    onAddHandler={this.addItem}
+                />
             </div>
         )
     }

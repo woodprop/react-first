@@ -1,9 +1,15 @@
 import React from "react";
 import './post-add-form.css';
 
-const PostAddForm = () => {
+const PostAddForm = ({onAddHandler}) => {
     return (
-        <form className="bottom-panel d-flex">
+        <form
+            className="bottom-panel d-flex"
+            onSubmit={(e) => {
+                e.preventDefault();
+                onAddHandler('bebebe');
+            }}
+            >
             <input
                 type="text"
                 placeholder="О чём вы думаете сейчас?"
